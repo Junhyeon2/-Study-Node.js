@@ -8,6 +8,31 @@ app.get('/', function (req, res) {
   res.send('Hello World!');
 });
 
+app.get('/dynamic', function(req, res){
+  var lis = '';
+  for(var i=0; i<5; ++i){
+    lis += '<li>coding</li>'
+  }
+  var time = Date();
+  //``: 코멘티드 텍스트
+  var output = `
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <meta charset="utf-8">
+      <title></title>
+    </head>
+    <body>
+      hello dynamic!
+      <ul>
+        ${lis}
+      </ul>
+      ${time}
+    </body>
+  </html>`;
+  res.send(output);
+});
+
 app.get('/route', function(req, res){
   res.send('Hello Router, <img src="/app_logo.png">')
 });
