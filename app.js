@@ -9,10 +9,32 @@ app.set('views', './views'); //두번째 인자는 폴더위치를 가리킨다(
 
 app.use(express.static('public')); //정적인 파일이 위치할 디렉토리를 설정.
 
+
+// 쿼리 스트링을 사용하기 위한 라우터 작성(시맨틱 URL 적용)
+app.get('/topic/:id', function(req, res){
+  //res.send(req.query.id+','+req.query.name); /topic?id=1?name=junhyeon
+  var topics = [
+    'javascript is ...',
+    'node.js is ...',
+    'express is ...'
+  ];
+  var output = `
+    <a href='/topic?id=0'>javascript</a><br>
+    <a href='/topic?id=1'>node.js</a><br>
+    <a href='/topic?id=2'>express</a><br><br>
+    ${topics[req.params.id]}
+  `;
+  res.send(output);
+});
+
+app.get('topic/:id/:mode', function(req, res){
+  res.send(req.params.id+','+req.params.mode);
+});
+
 app.get('/template', function(req,res){
   //views폴더의 temp.jade 파일을 읽어들여 응답.
   //두 번째 매개변수에 jade 파일에 전달할 값들을 JSON 형식으로 전달할 수 있다.
-  res.render('temp', {time : Date(), title: 'Jade'}); 
+  res.render('temp', {time : Date(), title: 'Jade'});
 });
 
 //get 메소드를 라우터라고 하고, 이러한 행위를 라우팅이라고 한다.
