@@ -56,3 +56,6 @@ typings/
 
 # dotenv environment variables file
 .env
+
+# template files
+app_template.js
